@@ -1,6 +1,7 @@
 const fs = require('fs'),
 	formidable = require('formidable'),
-	path = require('path');
+	path = require('path'),
+	mkdirp = require('mkdirp');
 
 exports.start = function(request, response) {
 	console.log('Rozpoczynam obsługę rządania start');
@@ -26,7 +27,9 @@ exports.upload = function(request, response) {
     form.parse(request, function(error, fields, files) {
     	const name = fields.title || files.upload.name;
     	freshImg = `images/${name}`;
-        fs.copyFileSync(files.upload.path, `images/${name}`); // fs.rename cause cross-origin error
+        mkdirp('./images', function(err) {
+	        fs.copyFileSync(files.upload.path, `images/${name}`); // fs.rename cause cross-origin error
+        });
         fs.readFile('3-HTML/upload.html', function(err, html) {
 			response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
 			response.write(html);

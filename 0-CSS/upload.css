@@ -12,9 +12,14 @@ body {
 }
 
 .image {
+	margin: 0 auto;
 	width: 50%;
-	margin: auto;
 }
 .image__item {
+	height: 100%;
 	width: 100%;
 }
+.image__submit {
+	width: 100%;
+}
+

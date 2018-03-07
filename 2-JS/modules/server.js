@@ -13,14 +13,17 @@ function start() {
 			case "/":
 				handlers.start(request, response);
 				break;
-			case "/css":
+			case "/startcss": //osobne zapytania dla CSS?
 				handlers.startCSS(request, response);
 				break;
-			case "/start":
-				handlers.start(request, response);
+			case "/uploadcss": //osobne zapytania dla CSS??
+				handlers.uploadCSS(request, response);
 				break;
 			case "/upload":
 				handlers.upload(request, response);
+				break;
+			case "/uploadJS": //osobne zapytania dla JS??
+				handlers.uploadJS(request, response);
 				break;
 			case "/show":
 				handlers.show(request, response);

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+
+<head> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="/css">
+    <title>start</title>
+</head>
+
+<body>
+    <section class="input container">
+        <h2 class="input__header">Wgraj plik</h2>
+        <form class="input__form" action="/upload" enctype="multipart/form-data" method="post">
+            <div class="input__item">
+                <h3>Tytuł pliku</h3>
+                <input class="input__title" type="text" name="title">
+            </div>
+            <div class="input__item">
+                <h3>Plik</h3>
+                <input class="input__browse" type="file" name="upload" multiple="multiple">
+            </div>
+            <div class="input__item input__item--last">
+                <input class="input__submit" type="submit" value="Wyślij">
+            </div>
+        </form>
+    </section>
+</body>
+
+</html>

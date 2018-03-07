@@ -1,0 +1,46 @@
+{
+  "name": "13-9",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm-run-all test:*",
+    "start": "nodemon 2-JS/index.js",
+    "test:html": "globstar nu-html-checker *.html",
+    "test:js": "globstar jshint 2-JS/*.js",
+    "init-project": "npm install && npm-run-all init:*",
+    "init:dirs": "mkdirp 0-CSS 1-SASS vendor images/icons 2-JS",
+    "init:files": "touch README.md index.html 2-JS/app.js 1-SASS/base.sass 1-SASS/layout.sass 1-SASS/app.sass",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "init:normalize": "curl https://necolas.github.io/normalize.css/7.0.0/normalize.css -o vendor/normalize.css",
+    "build": "npm-run-all build:* test",
+    "build:clean": "globstar rimraf 0-CSS/*.css",
+    "build:autoprefixer": "autoprefixer-cli 0-CSS/app.css",
+    "build-dev:sass": "node-sass --output-style expanded --source-map true -o 0-CSS 1-SASS",
+    "watch": "npm-run-all -p watch:*",
+    "watch:js": "node 2-JS/index.js",
+    "watch:sass": "node-sass --output-style compact -o 0-CSS 1-SASS",
+    "reload": "reload -n --port 3000 -s start.html",
+    "watch-sass": "onchange '1-SASS/*.sass' '2-JS/*' -i -- npm run watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.23.6",
+    "css-mqpacker": "^6.0.2",
+    "globstar": "^1.0.0",
+    "jshint": "^2.9.5",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.7.2",
+    "normalize.css": "^7.0.0",
+    "npm-run-all": "^4.1.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0",
+    "reload": "^2.2.2",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "formidable": "^1.1.1"
+  }
+}

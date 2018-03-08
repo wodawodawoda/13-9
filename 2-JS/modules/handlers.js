@@ -1,16 +1,17 @@
 const fs = require('fs'),
 	formidable = require('formidable'),
 	path = require('path'),
-	mkdirp = require('mkdirp'),
-	server = require('./server.js');
+	mkdirp = require('mkdirp'); 
 
 let pathes = {
 	img: [],
 	url: []
-}
+};
+
+const info = `Rozpoczynam obsługę rządania`;
 
 exports.start = function(request, response) {
-	pathes.url.unshift(request.url);
+	pathes.url.unshift(request.url); // Zamiast dodawania do patches użyć server.acturl
 	console.log('Rozpoczynam obsługę rządania start');
 	fs.readFile('3-HTML/start.html', function(err, html) {
 		response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });

@@ -1,5 +1,5 @@
 const http = require('http'),
-	colors = require('colors');
+	colors = require('colors'),
 	handlers = require('./handlers.js');
 
 function start() {
@@ -13,20 +13,17 @@ function start() {
 			case "/":
 				handlers.start(request, response);
 				break;
-			case "/startcss": //osobne zapytania dla CSS?
-				handlers.startCSS(request, response);
-				break;
-			case "/uploadcss": //osobne zapytania dla CSS??
-				handlers.uploadCSS(request, response);
-				break;
 			case "/upload":
 				handlers.upload(request, response);
 				break;
-			case "/uploadJS": //osobne zapytania dla JS??
-				handlers.uploadJS(request, response);
-				break;
 			case "/show":
 				handlers.show(request, response);
+				break;
+			case "/css":
+				handlers.css(request, response);
+				break;
+			case "/js":
+				handlers.uploadJS(request, response);
 				break;
 			default:
 				handlers.error(request, response);
@@ -39,3 +36,5 @@ function start() {
 }
 
 exports.start = start;
+
+// exports.acturl = request.url // Eksport do handlers??

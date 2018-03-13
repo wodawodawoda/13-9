@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm-run-all test:*",
-    "start": "nodemon 2-JS/index.js",
+    "start": "nodemon js/index.js -o",
     "test:html": "globstar nu-html-checker *.html",
     "test:js": "globstar jshint 2-JS/*.js",
     "init-project": "npm install && npm-run-all init:*",

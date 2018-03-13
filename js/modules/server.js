@@ -6,24 +6,30 @@ function start() {
 	function onRequest(request, response) {
 		console.log('Odebrano zapytanie.');
 		console.log(`Zapytanie ${request.url} odebrane`);
-	
-		response.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
-	
-		switch(request.url) {
+
+		response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+
+		switch (request.url) {
 			case "/":
-				handlers.start(request, response);
+				response.writeHead(302, {
+					'Location': '/.html'
+					//add other headers here...
+				}); 
+				response.end();
+				// handlers.start(request, response);
 				break;
 			case "/upload":
 				handlers.upload(request, response);
 				break;
-			case "/show":
-				handlers.show(request, response);
-				break;
-			case "/css":
-				handlers.css(request, response);
-				break;
-			case "/js":
-				handlers.uploadJS(request, response);
+			// case "/show":
+			// 	handlers.show(request, response);
+			// 	break;
+			case "/.css":
+			case "/.js":
+			case "/.html":
+			case "/upload.html":
+			case "/.png":
+				handlers.data(request, response);
 				break;
 			default:
 				handlers.error(request, response);

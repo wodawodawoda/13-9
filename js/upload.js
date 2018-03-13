@@ -1,1 +1,1 @@
-console.log('upload.js loaded')
+console.log('upload.js loaded');

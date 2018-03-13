@@ -4,6 +4,7 @@ const fs = require('fs'),
 	mkdirp = require('mkdirp');
 
 let lastImage;
+
 function upload(request) {
 	console.log("Rozpoczynam obsługę rządania upload");
 	const form = new formidable.IncomingForm();
@@ -13,13 +14,13 @@ function upload(request) {
 			fs.copyFileSync(files.upload.path, `images/${lastImage}`); // fs.rename cause cross-origin error
 		});
 	});
-};
+}
 
 exports.data = function(request, response) {
-	if (request.url === '/upload.html') {upload(request)};
-	const url = request.url === '/.png' ? lastImage : request.url;
-	const type = request.url === '/.png' ? 'images/' : /\.(.*)/.exec(url)[1];
-	const bin = request.url === '/.png' ? 'binary' : '';
+	if (request.url === '/upload.html') { upload(request); }
+	let params = [request.url, /\.(.*)/.exec(request.url)[1], ''];
+	if (request.url === '/.png') { params = [lastImage, 'images/', 'binary']; }
+	let [url, type, bin, content] = [...params];
 	fs.readFile(`${type}${url}`, bin, function(err, data) {
 		response.writeHead(200, `{"Content-Type": "text/${type}"}`);
 		response.write(data, bin);

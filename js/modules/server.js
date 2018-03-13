@@ -8,31 +8,19 @@ function start() {
 		console.log(`Zapytanie ${request.url} odebrane`);
 
 		response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+		
 
-		switch (request.url) {
-			case "/":
-				response.writeHead(302, {
-					'Location': '/.html'
-					//add other headers here...
-				}); 
-				response.end();
-				// handlers.start(request, response);
-				break;
-			case "/upload":
-				handlers.upload(request, response);
-				break;
-			// case "/show":
-			// 	handlers.show(request, response);
-			// 	break;
-			case "/.css":
-			case "/.js":
-			case "/.html":
-			case "/upload.html":
-			case "/.png":
-				handlers.data(request, response);
-				break;
-			default:
-				handlers.error(request, response);
+		if (/.css$/.test(request.url) || 
+			/.html$/.test(request.url) || 
+			/.js$/.test(request.url) || 
+			/.png$/.test(request.url)) 
+		{
+			handlers.data(request, response);
+		} else if (request.url === '/') {
+			response.writeHead(302, {'Location': '/.html'}); 
+			response.end();
+		} else {
+			handlers.error(request, response);
 		}
 	}
 

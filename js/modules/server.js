@@ -29,5 +29,3 @@ function start() {
 }
 
 exports.start = start;
-
-// exports.acturl = request.url // Eksport do handlers??

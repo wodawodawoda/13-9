@@ -5,8 +5,9 @@ const fs = require('fs'),
 
 let lastImage;
 
+// Save uploaded img on server
 function upload(request) {
-	console.log("Rozpoczynam obsługę rządania upload");
+	console.log("Rozpoczynam obsługę żądania upload");
 	const form = new formidable.IncomingForm();
 	form.parse(request, function(error, fields, files) {
 		lastImage = fields.title || files.upload.name;
@@ -16,10 +17,11 @@ function upload(request) {
 	});
 }
 
+// Send html,css,js,img requests to client 
 exports.data = function(request, response) {
-	if (request.url === '/upload.html') { upload(request); }
-	let params = [request.url, /\.(.*)/.exec(request.url)[1], '']; // Default
-	if (request.url === '/.png') { params = [lastImage, 'images/', 'binary']; }
+	if (request.url === '/upload.html') { upload(request); } // Run upload to save img on server
+	let params = [request.url, /\.(.*)/.exec(request.url)[1], '']; // Default file display parameters
+	if (request.url === '/.png') { params = [lastImage, 'images/', 'binary']; } //.png image display parameters
 	let [url, type, bin] = [...params];
 	fs.readFile(`${type}${url}`, bin, function(err, data) {
 		response.writeHead(200, `{"Content-Type": "text/${type}"}`);
